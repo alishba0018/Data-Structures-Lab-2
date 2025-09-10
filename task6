@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    int rows;
+    cout << "Enter number of rows in the hall: ";
+    cin >> rows;
+    int* seatsPerRow = new int[rows];
+    string** seating = new string*[rows];
+    for (int r = 0; r < rows; r++) {
+        cout << "\nEnter number of seats in row " << r + 1 << ": ";
+        cin >> seatsPerRow[r];
+        seating[r] = new string[seatsPerRow[r]]; 
+        cout << "Enter names for row " << r + 1 << ":\n";
+        for (int s = 0; s < seatsPerRow[r]; s++) {
+            cout << "  Seat " << s + 1 << ": ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            getline(cin, seating[r][s]);
+        }
+    }
+    cout << "Seating Chart";
+    for (int r = 0; r < rows; r++) {
+        cout << "Row " << r + 1 << ": ";
+        for (int s = 0; s < seatsPerRow[r]; s++) {
+            cout << "[" << seating[r][s] << "] ";
+        }
+        cout << endl;
+    }
+    for (int r = 0; r < rows; r++) {
+        delete[] seating[r];
+    }
+    delete[] seating;
+    delete[] seatsPerRow;
+    return 0;
+}
