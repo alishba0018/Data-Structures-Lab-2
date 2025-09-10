@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    const int departments = 4;
+    string deptNames[departments] = {"Software Engineering (SE)", 
+                                     "Artificial Intelligence (AI)", 
+                                     "Computer Science (CS)", 
+                                     "Data Science (DS)"};
+    int courses[departments] = {3, 4, 2, 1};
+    float** gpa = new float*[departments];
+    for (int d = 0; d < departments; d++) {
+        gpa[d] = new float[courses[d]];
+        cout << "\nEnter GPAs for " << deptNames[d] << " (" << courses[d] << " courses):\n";
+        for (int c = 0; c < courses[d]; c++) {
+            cout << "  Course " << c + 1 << ": ";
+            cin >> gpa[d][c];
+        }
+    }
+    cout << "GPA Report (First Semester Core Courses)";
+    for (int d = 0; d < departments; d++) {
+        cout << deptNames[d] << ":\n";
+        for (int c = 0; c < courses[d]; c++) {
+            cout << "  Course " << c + 1 << " GPA: " << gpa[d][c] << endl;
+        }
+    }
+    for (int d = 0; d < departments; d++) {
+        delete[] gpa[d];
+    }
+    delete[] gpa;
+    return 0;
+}
